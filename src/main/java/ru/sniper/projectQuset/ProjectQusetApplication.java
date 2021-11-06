@@ -10,10 +10,7 @@ import ru.sniper.projectQuset.repository.QuestRepository;
 import ru.sniper.projectQuset.repository.ResultRepository;
 import ru.sniper.projectQuset.repository.UserRepository;
 import java.io.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 @SpringBootApplication
 public class ProjectQusetApplication {
@@ -33,7 +30,7 @@ public class ProjectQusetApplication {
 		String answer3;
 		String answer4;
 		int true_answer;
-		int maxStr = 1;
+		int maxStr = 0;
 		int ball = 0;
 		int user_answer;
 		Random random = new Random();
@@ -70,38 +67,46 @@ public class ProjectQusetApplication {
 
 			//запускаем цикл с вопросами
             List<QuestEntity> l = new LinkedList<>();
+            ArrayList<Integer> arrayList = new ArrayList<>();
+            boolean b = true;
             l = questRepository.findAll();
 			for (int i = 1; i <= maxStr - 10; i++) {
 				int a = random.nextInt(maxStr);
-				ResultEntity resultEntity = new ResultEntity();
-				resultEntity.setUser_id(userEntity.getId());
-				QuestEntity q = l.get(a);
-				quest = q.getQuest();
-				answer1 = q.getAnswer1();
-				answer2 = q.getAnswer2();
-				answer3 = q.getAnswer3();
-				answer4 = q.getAnswer4();
-				true_answer = q.getTrue_answer();
+				//проверка на повтор вопроса
+				if (b == arrayList.contains(a)) {
+					a = random.nextInt(maxStr);
+				} else {
+                    arrayList.add(a);
+					ResultEntity resultEntity = new ResultEntity();
+					resultEntity.setUser_id(userEntity.getId());
+					QuestEntity q = l.get(a);
+					quest = q.getQuest();
+					answer1 = q.getAnswer1();
+					answer2 = q.getAnswer2();
+					answer3 = q.getAnswer3();
+					answer4 = q.getAnswer4();
+					true_answer = q.getTrue_answer();
 
-				System.out.println("--------------------------------------------------");
-				System.out.println("Вопрос №" + i + ":");
-				System.out.println(quest);
-				System.out.println("--------------------------------------------------");
-				System.out.println("Введите № ответа и нажмите Enter.");
-				System.out.println("1: " + answer1);
-				System.out.println("2: " + answer2);
-				System.out.println("3: " + answer3);
-				System.out.println("4: " + answer4);
-				user_answer = scanner.nextInt();
-				System.out.println("--------------------------------------------------");
-				if (user_answer == true_answer) {
-					ball++;
+					System.out.println("--------------------------------------------------");
+					System.out.println("Вопрос №" + i + ":");
+					System.out.println(quest);
+					System.out.println("--------------------------------------------------");
+					System.out.println("Введите № ответа и нажмите Enter.");
+					System.out.println("1: " + answer1);
+					System.out.println("2: " + answer2);
+					System.out.println("3: " + answer3);
+					System.out.println("4: " + answer4);
+					user_answer = scanner.nextInt();
+					System.out.println("--------------------------------------------------");
+					if (user_answer == true_answer) {
+						ball++;
+					}
+					//заполняем сущность результатов и пишем в базу
+					resultEntity.setQuest_result(quest);
+					resultEntity.setAnswer_result(String.valueOf(true_answer));
+					resultEntity.setAnswer_user(String.valueOf(user_answer));
+					resultRepository.save(resultEntity);
 				}
-				//заполняем сущность результатов и пишем в базу
-				resultEntity.setQuest_result(quest);
-				resultEntity.setAnswer_result(String.valueOf(true_answer));
-				resultEntity.setAnswer_user(String.valueOf(user_answer));
-				resultRepository.save(resultEntity);
 			}
 			//заполняем пользователя и пишем в базу
 			userEntity.setBall(ball);

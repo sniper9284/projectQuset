@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.sniper.projectQuset.entity.UserEntity;
 import ru.sniper.projectQuset.repository.UserRepository;
 import java.util.List;
-import java.util.Optional;
 
 @Transactional
 @Service
@@ -18,8 +17,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<UserEntity> getById(int id) {
-        return userRepository.findById(id);
+    public UserEntity getById(int id) {
+        return userRepository.getById(id);
     }
 
     @Override
