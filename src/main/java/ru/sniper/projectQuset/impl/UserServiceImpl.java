@@ -1,14 +1,15 @@
-package ru.sniper.projectQuset.service;
+package ru.sniper.projectQuset.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sniper.projectQuset.entity.UserEntity;
 import ru.sniper.projectQuset.repository.UserRepository;
+import ru.sniper.projectQuset.service.UserService;
+
 import java.util.List;
 
-@Transactional
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
@@ -39,6 +40,7 @@ public class UserServiceImpl implements UserService{
         userRepository.delete(userEntity);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<UserEntity> getAll() {
         return userRepository.findAll();

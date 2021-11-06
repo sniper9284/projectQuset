@@ -1,14 +1,9 @@
 package ru.sniper.projectQuset.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "quest_table")
-@Getter
-@Setter
 public class QuestEntity {
 
     @Id
@@ -32,7 +27,7 @@ public class QuestEntity {
     private String answer4;
 
     @Column(name = "true_answer")
-    private int true_answer;
+    private int trueAnswer;
 
     public QuestEntity() {
     }
@@ -85,11 +80,11 @@ public class QuestEntity {
         this.answer4 = answer4;
     }
 
-    public int getTrue_answer() {
-        return true_answer;
+    public int getTrueAnswer() {
+        return trueAnswer;
     }
 
-    public void setTrue_answer(int true_answer) {
-        this.true_answer = true_answer;
+    public void setTrueAnswer(int true_answer) {
+        this.trueAnswer = true_answer;
     }
 }
