@@ -1,4 +1,4 @@
-package ru.sniper.projectQuset.impl;
+package ru.sniper.projectQuset.repository.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
