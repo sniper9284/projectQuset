@@ -1,4 +1,4 @@
-package ru.sniper.projectQuset.repository.impl;
+package ru.sniper.projectQuset.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +8,7 @@ import ru.sniper.projectQuset.service.ResultService;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class ResultServiceImpl implements ResultService {
 
     private final ResultRepository resultRepository;
@@ -37,13 +38,11 @@ public class ResultServiceImpl implements ResultService {
         resultRepository.save(updateResult);
     }
 
-
     @Override
     public void deleteResult(ResultEntity resultEntity) {
         resultRepository.delete(resultEntity);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<ResultEntity> getAll() {
         return resultRepository.findAll();

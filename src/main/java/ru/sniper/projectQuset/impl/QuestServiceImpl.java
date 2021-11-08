@@ -1,4 +1,4 @@
-package ru.sniper.projectQuset.repository.impl;
+package ru.sniper.projectQuset.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +9,7 @@ import ru.sniper.projectQuset.service.QuestService;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class QuestServiceImpl implements QuestService {
 
     private final QuestRepository questRepository;
@@ -44,7 +45,6 @@ public class QuestServiceImpl implements QuestService {
         questRepository.delete(questEntity);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<QuestEntity> getAll() {
         return questRepository.findAll();

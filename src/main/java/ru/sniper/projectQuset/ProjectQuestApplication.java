@@ -6,6 +6,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import ru.sniper.projectQuset.service.QuestService;
 import ru.sniper.projectQuset.service.ResultService;
 import ru.sniper.projectQuset.service.UserService;
+import ru.sniper.projectQuset.util.Quest;
+import ru.sniper.projectQuset.util.WriteFileToBD;
 
 @SpringBootApplication
 public class ProjectQuestApplication {

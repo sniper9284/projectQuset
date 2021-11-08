@@ -1,4 +1,4 @@
-package ru.sniper.projectQuset;
+package ru.sniper.projectQuset.util;
 
 import ru.sniper.projectQuset.entity.QuestEntity;
 import ru.sniper.projectQuset.entity.ResultEntity;
