@@ -1,4 +1,4 @@
-package ru.sniper.projectQuset.impl;
+package ru.sniper.projectQuset.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,11 +23,13 @@ public class QuestServiceImpl implements QuestService {
         return questRepository.getById(id);
     }
 
+    @Transactional
     @Override
     public void saveQuest(QuestEntity questEntity) {
         questRepository.save(questEntity);
     }
 
+    @Transactional
     @Override
     public void updateQuest(int id, String quest, String answer1, String answer2, String answer3, String answer4, int true_answer) {
         QuestEntity updateQuest = questRepository.getById(id);
@@ -40,6 +42,7 @@ public class QuestServiceImpl implements QuestService {
         questRepository.save(updateQuest);
     }
 
+    @Transactional
     @Override
     public void deleteQuest(QuestEntity questEntity) {
         questRepository.delete(questEntity);

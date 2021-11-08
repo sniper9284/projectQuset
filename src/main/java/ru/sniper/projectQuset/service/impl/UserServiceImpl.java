@@ -1,4 +1,4 @@
-package ru.sniper.projectQuset.impl;
+package ru.sniper.projectQuset.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,11 +23,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.getById(id);
     }
 
+    @Transactional
     @Override
     public void saveUser(UserEntity userEntity) {
         userRepository.save(userEntity);
     }
 
+    @Transactional
     @Override
     public void updateUser(int id, String login, int ball) {
         UserEntity updateUser = userRepository.getById(id);
@@ -36,6 +38,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(updateUser);
     }
 
+    @Transactional
     @Override
     public void deleteUser(UserEntity userEntity) {
         userRepository.delete(userEntity);
