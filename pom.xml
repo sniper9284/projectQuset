@@ -35,7 +35,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -65,12 +66,13 @@
 			<artifactId>jaxb-api</artifactId>
 			<version>2.3.0</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/com.guicedee.services/hibernate-core -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
+			<groupId>com.guicedee.services</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.1.4.Final</version>
+			<version>62</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -84,14 +86,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

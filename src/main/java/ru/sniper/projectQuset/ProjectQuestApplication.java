@@ -9,7 +9,6 @@ import ru.sniper.projectQuset.entity.UserEntity;
 import ru.sniper.projectQuset.service.QuestService;
 import ru.sniper.projectQuset.service.ResultService;
 import ru.sniper.projectQuset.service.UserService;
-
 import java.io.*;
 import java.util.*;
 
@@ -23,23 +22,16 @@ public class ProjectQuestApplication {
         QuestService questService = context.getBean(QuestService.class);
         ResultService resultService = context.getBean(ResultService.class);
 
-        Scanner scanner = new Scanner(System.in);
-        String login;
-        String quest;
-        String answer1;
-        String answer2;
-        String answer3;
-        String answer4;
-        int trueAnswer;
-        int maxStr = 0;
-        int ball = 0;
-        int userAnswer;
-        Random random = new Random();
+        if (questService.getAll().isEmpty()) {
+            writeFileToBD(questService);
+        }
+        quest(userService, resultService, questService);
+    }
+
+    private static void writeFileToBD(QuestService questService) {
+
         List<String> list = new ArrayList<>();
         String line;
-        List<QuestEntity> l = new ArrayList<>();
-        ArrayList<Integer> arrayList = new ArrayList<>();
-
         try {
             File file = new File(
                     ProjectQuestApplication.class.getClassLoader().getResource("project.csv").getFile()
@@ -60,14 +52,30 @@ public class ProjectQuestApplication {
                 questService.saveQuest(q);
                 // считываем остальные строки в цикле
                 line = reader.readLine();
-                maxStr++;
             }
             reader.close();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void quest(UserService userService, ResultService resultService, QuestService questService) {
+        Scanner scanner = new Scanner(System.in);
+        String login;
+        String quest;
+        String answer1;
+        String answer2;
+        String answer3;
+        String answer4;
+        int trueAnswer;
+        int ball = 0;
+        int userAnswer;
+        Random random = new Random();
+        List<QuestEntity> l = questService.getAll();
+        ArrayList<Integer> arrayList = new ArrayList<>();
 
         //запрашиваем логин пользователя
         System.out.println("--------------------------------------------------");
@@ -78,11 +86,11 @@ public class ProjectQuestApplication {
 
         boolean b = true;
         l = questService.getAll();
-        for (int i = 1; i <= maxStr - 5; i++) {
-            int a = random.nextInt(maxStr);
+        for (int i = 1; i <= l.size() - 5; i++) {
+            int a = random.nextInt(l.size());
             //проверка на повтор вопроса
             if (b == arrayList.contains(a)) {
-                a = random.nextInt(maxStr);
+                a = random.nextInt(l.size());
             } else {
                 arrayList.add(a);
                 ResultEntity resultEntity = new ResultEntity();
