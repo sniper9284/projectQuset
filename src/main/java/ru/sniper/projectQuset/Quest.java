@@ -6,7 +6,6 @@ import ru.sniper.projectQuset.entity.UserEntity;
 import ru.sniper.projectQuset.service.QuestService;
 import ru.sniper.projectQuset.service.ResultService;
 import ru.sniper.projectQuset.service.UserService;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

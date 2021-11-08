@@ -1,9 +1,16 @@
 package ru.sniper.projectQuset.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
+@Setter
+@Getter
+@NoArgsConstructor
 public class UserEntity {
 
     @Id
@@ -17,34 +24,7 @@ public class UserEntity {
     @Column(name = "ball")
     private int ball;
 
-    public UserEntity() {
-    }
-
     public UserEntity(String login) {
         this.login = login;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public int getBall() {
-        return ball;
-    }
-
-    public void setBall(int ball) {
-        this.ball = ball;
     }
 }
